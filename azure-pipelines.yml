@@ -38,6 +38,24 @@ stages:
           branchBuildNumber: $[counter(variables['Build.SourceBranch'], 0)]
         displayName: 'BranchName'
         steps:
+<<<<<<< Ep01-pipeline-creation
+          - script: echo 'Running Spring demo app unit test'
+          - task: Maven@3
+            inputs:
+              mavenPomFile: 'pom.xml'
+              goals: 'test'
+              options: '--no-transfer-progress'
+              publishJUnitResults: true
+              testResultsFiles: '**/surefire-reports/TEST-*.xml'
+              codeCoverageToolOption: 'JaCoCo'
+              javaHomeOption: 'JDKVersion'
+              mavenVersionOption: 'Default'
+              mavenAuthenticateFeed: false
+              effectivePomSkip: false
+              sonarQubeRunAnalysis: false
+              checkStyleRunAnalysis: true
+              pmdRunAnalysis: true
+=======
         - template: 'cicd/templates/buildBranchName.yml'
 
   - stage: 'BuildArtifact'
@@ -56,3 +74,5 @@ stages:
         displayName: 'Build and Publish Docker Image'
         steps:
           - template: 'cicd/templates/dockerize.yml'
+>>>>>>> master
+
